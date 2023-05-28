@@ -18,8 +18,8 @@ router.get('/', (req, res) => {
       },
     ],
   })
-    .then((response) => {
-      res.json(response);
+    .then((product) => {
+      res.json(product);
     })
     .catch((err) => {
       console.error(err);
