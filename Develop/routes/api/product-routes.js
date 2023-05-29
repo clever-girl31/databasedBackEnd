@@ -59,13 +59,14 @@ router.get('/:id', (req, res) => {
 
 // create new product
 router.post('/', (req, res) => {
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
+  /* paste from here
+ { 
+	 "product_name": "Tuxedo T-Shirt",
+   "price": 200.00,
+   "stock": 3,
+   "tagIds": [4],
+   "category_id": 1
+ }
   */
   Product.create(req.body)
     .then((product) => {

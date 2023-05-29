@@ -26,24 +26,32 @@ router.get('/', (req, res) => {
 // find one category by its `id` value
 // be sure to include its associated Products
 router.get('/:id', (req, res) => {
-  const catId = req.params.id
   Category.findOne({
-    where: { id: catId },
+    where: { id: req.params.id },
     include: [
       {
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
       }
     ]
+  })
+  .then((category) => {
+    res.json(category)
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json({ message: 'Could not retrieve'})
   })
 });
 
 // create a new category
 router.post('/', (req, res) => {
   Category.create(req.body)
-    .then((category) => res.status(200).json(category))
+    .then((category) => {
+      res.status(200).json(category)
+    })
     .catch((err) => {
-      console.errog(err);
+      console.error(err);
       res.status(400).json(err)
     })
 });
